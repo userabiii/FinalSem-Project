@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="analysisstyle.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Dr.Sachith's Skin Clinic</title>
+    <script>
+        // Function to validate form submission
+        function validateForm() {
+            // Validate age selection
+            var age = document.getElementById("age").value;
+            if (age === "select") {
+                alert("Please select your age.");
+                return false;
+            }
+
+            // Validate gender selection
+            var gender = document.querySelector('input[name="gender"]:checked');
+            if (!gender) {
+                alert("Please select your gender.");
+                return false;
+            }
+
+            // Validate skin concerns selection
+            var skinConcerns = document.querySelectorAll('input[name="skinConcerns[]"]:checked');
+            if (skinConcerns.length === 0) {
+                alert("Please select at least one skin concern.");
+                return false;
+            }
+
+            return true; // Form is valid
+        }
+
+        // Function to handle form submission
+        function submitForm() {
+            // Validate form before submission
+            if (validateForm()) {
+                // Form is valid, proceed with submission
+                return true;
+            }
+            return false;
+        }
+
+        // Function to dynamically populate skin type options based on selected skin concern
+        function populateSkinTypes() {
+            var skinTypeSelect = document.getElementById('skinType');
+            var selectedSkinConcern = document.querySelector('input[name="skinConcerns[]"]:checked');
+            if (selectedSkinConcern) {
+                var skinTypes = selectedSkinConcern.getAttribute('data-skin-types').split(',');
+                skinTypeSelect.innerHTML = '';
+                skinTypes.forEach(type => {
+                    var option = document.createElement('option');
+                    option.value = type;
+                    option.textContent = type;
+                    skinTypeSelect.appendChild(option);
+                });
+            }
+        }
+    </script>
+</head>
+<div class="header">
+    <input type="checkbox" id="menu">
+    <header>
+        <div class="logo">
+            <a style="text-decoration: none;" href="../derm/home.html"><p><img src="../derm/Logo.png"></a>
+        </div>
+
+        <label for="menu">
+            <div></div>
+            <div></div>
+            <div></div>
+        </label>
+
+        <nav>
+          <ul>
+              <li><a href="../derm/home.html">Home</a></li>
+              <li><a href="../derm/about.html">About Us</a></li>
+              <li class="dropdown">
+                  <a href="#">Procedures</a>
+                  <div class="dropdown-content">
+                    <a href="../derm/Procedures/laser.html">Laser</a>
+                    <a href="../derm/Procedures/microdermabrasion.html">Microdermabrasion</a>
+                    <a href="../derm/Procedures/chem peel.html">Chemical Peel</a>
+                    <a href="../derm/Procedures/hydrafacial.html">Hydrafacial</a>
+                    <a href="../derm/Procedures/skinrejuv.html">Skin Rejuvenation</a>
+                    <a href="../derm/Procedures/dermaroller.html">Dermaroller</a>
+                  </div>
+              </li>
+              <li><a href="../derm/contact.html">Contact</a></li>
+              <li><a href="../appointment/"><span>Appointment</span></a></li>
+          </ul>
+      </nav>
+    </header>
+</div><br/><br/>
+<body>
+<main>
+    <div class="banner">
+        <h2>Skin Analysis</h2>
+    </div>
+    <div class="content">
+        <form action="process.php" method="post" onsubmit="return submitForm()">
+  
+    <label for="age">Age:</label><br/>
+    <select name="age" id="age">
+        <option value="select">Select</option>
+        <option value="13-18">13-18</option>
+        <option value="19-25">19-25</option>
+        <option value="26-35">26-35</option>
+        <option value="36-45">36-45</option>
+        <option value="46-60">46-60</option>
+    </select><br><br>
+
+    <label for="gender">Gender:</label><br/>
+    <input type="radio" name="gender" value="Male"> Male
+    <input type="radio" name="gender" value="Female"> Female<br><br>
+
+    <label for="skinConcerns">Skin Concerns:</label><br/>
+    <input type="radio" name="skinConcerns[]" value="Acne" onclick="populateSkinTypes()" data-skin-types="oily,dry,normal,combination,sensitive"> Acne<br>
+    <input type="radio" name="skinConcerns[]" value="Blemishes" onclick="populateSkinTypes()" data-skin-types="oily,dry,normal,combination,sensitive"> Blemishes<br>
+    <input type="radio" name="skinConcerns[]" value="Wrinkles" onclick="populateSkinTypes()" data-skin-types="oily,dry,normal,combination,sensitive"> Wrinkles<br>
+    <br><br>
+
+    <!-- Skin Type selection -->
+    <label for="skinType">Skin Type:</label><br/>
+    <select name="skinType" id="skinType">            
+        <!-- Skin type options will be dynamically added here -->
+    </select><br><br>
+
+    <input type="submit" value="Submit">
+    </form>        
+</div>
+</main>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<footer>
+        <div class="row">
+            <div class="col">
+                <img src="../derm/Logo.png" class="footerlogo">
+                <p>
+                    <br/>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d304.1110955566738!2d77.61924677321315!3d12.934012425957118!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae145ec0000001%3A0x729e898aac114f86!2sDr.%20Sachith%20Abraham%2C%20MD%20(Dermatology)%20at%20The%20Medical%20Skin%20Clinic!5e0!3m2!1sen!2sin!4v1712233797063!5m2!1sen!2sin" width="350" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </p>
+            </div>
+            <div class="col">
+                <h3 style="text-align: left;">Location<div class="underline"></div></h3>
+                <br/><p>474, 1st Floor,</p>
+                <p>1st Cross Road, KHB Colony,</p>
+                <p>5th Block, Koramangala,</p>
+                <p>Bengaluru, Karnataka-560095</p>
+                <p class="email-id"><a href="mailto:sachith_abraham@yahoo.com">sachith_abraham@yahoo.com</a></p>
+                <h4 style="text-align: left;"><p class="phn"><a href="tel:9845716926">+91 9845716926</a><br/><a href="tel:9148970822">+91 9148970822</a></p></h4>
+            </div>
+            <div class="col">
+                <h3 style="text-align: left;">Navigate<div class="underline"></div></h3>
+                <br/><ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="Procedures/laser.html">Services</a></li>
+                    <li><a href="contact.html">Contact us</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+    <p class="copyright"><b>SOCIALS</b></p><br/>
+    <div class="social-links">
+        <a href="https://www.facebook.com/drsachithabraham/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/the_medical_skin_clinic/"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/sachith-abraham-03a0041b/"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://twitter.com/sachithabraham"><i class="fab fa-x-twitter"></i></a>
+    </div>
+    <div class="skinneeds">
+        <br/><p>Shop for selected skin and hair care products at</p><br/>
+        <a href="https://skinneeds.in/">skinneeds.in</a>
+        <span>&#10095</span>
+    </div>
+    <br/><p class="copyright"> © Dr. Sachith's Skin Clinic- All Rights Reserved.</p>
+</footer>
+</body>
+</html>
